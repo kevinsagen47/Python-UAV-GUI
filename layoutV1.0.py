@@ -65,25 +65,31 @@ def update_gui():
     global update_period
 
     t.place(x = 3, y = 425)
-    progress_1.place(x = 60, y = 100)
-    progress_2.place(x = 60, y = 130)
-    progress_3.place(x = 60, y = 160)
-    progress_4.place(x = 60, y = 190)
-    progress_5.place(x = 60, y = 220)
+    Bat_1.place(x = 60, y = 100)
+    Bat_2.place(x = 60, y = 130)
+    Pitch.place(x = 60, y = 160)
+    Roll.place(x = 60, y = 190)
+    Throttle.place(x = 60, y = 220)
     new = time.time()
-    
+
+
+    varBat1=StringVar()
+    #Bat1__.place(x = 160, y= 100)
+    Bat1__ = Label(textvariable=varBat1).place(x = 160, y= 100)
     while(1):
         if filter_data:
 
             #text.insert(END, filter_data) <-- the text box text
             #text.insert(END,"\n")
             try:
-                progress_1["value"] = filter_data[0]
-                progress_2["value"] = filter_data[1]
-                progress_3["value"] = filter_data[2]
-                progress_4["value"] = filter_data[3]
-                progress_5["value"] = filter_data[4]
+                Bat_1["value"] = filter_data[0]
+                Bat_2["value"] = filter_data[1]
+                Pitch["value"] = filter_data[2]
+                Roll["value"] = filter_data[3]
+                Throttle["value"] = filter_data[4]
 
+                varBat1.set(filter_data[0])
+                #Bat1__.set(Bat_1["value"])
             
             except :
                 pass
@@ -91,11 +97,11 @@ def update_gui():
             
             if time.time() - new >= update_period:
                 #text.delete("1.0", END)
-                progress_1["value"] = 0
-                progress_2["value"] = 0
-                progress_3["value"] = 0
-                progress_4["value"] = 0
-                progress_5["value"] = 0
+                Bat_1["value"] = 0
+                Bat_2["value"] = 0
+                Pitch["value"] = 0
+                Roll["value"] = 0
+                Throttle["value"] = 0
                 new = time.time()
 
 
@@ -112,11 +118,13 @@ def send():
                                     #Main Loop
 
 if __name__ == "__main__":
+
+
     #frames   430x770
-    frame_1 = Frame(height = 200, width = 377, bd = 3, relief = 'groove').place(x = 5, y = 5)
-    frame_2 = Frame(height = 200, width = 377, bd = 3, relief = 'groove').place(x = 382, y = 5)
-    frame_3 = Frame(height = 200, width = 377, bd = 3, relief = 'groove').place(x = 5, y = 205)
-    frame_4 = Frame(height = 200, width = 377, bd = 3, relief = 'groove').place(x = 382, y = 205)
+    frame_1 = Frame(height = 207, width = 378, bd = 3, relief = 'groove').place(x = 5, y = 5)
+    frame_2 = Frame(height = 207, width = 378, bd = 3, relief = 'groove').place(x = 383, y = 5)
+    frame_3 = Frame(height = 207, width = 378, bd = 3, relief = 'groove').place(x = 5, y = 212)
+    frame_4 = Frame(height = 207, width = 378, bd = 3, relief = 'groove').place(x = 383, y = 212)
     t = Text(width = 1, height = 1)
     #text = None 
     
@@ -127,21 +135,24 @@ if __name__ == "__main__":
 
     
     #Labels
-    data1_ = Label(text = "Data1:").place(x = 15, y= 100)
-    data2_ = Label(text = "Data2:").place(x = 15, y= 130)
-    data3_ = Label(text = "Data3:").place(x = 15, y= 160)
-    data4_ = Label(text = "Data4:").place(x = 15, y= 190)
-    data5_ = Label(text = "Data5:").place(x = 15, y= 220)
+    Bat1_ = Label(text = "Bat 1:").place(x = 15, y= 100)
+    Bat2_ = Label(text = "Bat 2:").place(x = 15, y= 130)
+    Pitch_ = Label(text = "Pitch:").place(x = 15, y= 160)
+    Roll_ = Label(text = "Roll:").place(x = 15, y= 190)
+    Throttle_ = Label(text = "Throttle:").place(x = 15, y= 220)
 
+    
+    
     #progress_bars
-    progress_1 = ttk.Progressbar(orient = HORIZONTAL, mode = 'determinate', length = 200, max = 255)
-    progress_2 = ttk.Progressbar(orient = HORIZONTAL, mode = 'determinate', length = 200, max = 255)
-    progress_3 = ttk.Progressbar(orient = HORIZONTAL, mode = 'determinate', length = 200, max = 255)
-    progress_4 = ttk.Progressbar(orient = HORIZONTAL, mode = 'determinate', length = 200, max = 255)
-    progress_5 = ttk.Progressbar(orient = HORIZONTAL, mode = 'determinate', length = 200, max = 255)
+    Bat_1 = ttk.Progressbar(orient = HORIZONTAL, mode = 'determinate', length = 200, max = 255)
+    Bat_2 = ttk.Progressbar(orient = HORIZONTAL, mode = 'determinate', length = 200, max = 255)
+    Pitch = ttk.Progressbar(orient = HORIZONTAL, mode = 'determinate', length = 200, max = 255)
+    Roll = ttk.Progressbar(orient = HORIZONTAL, mode = 'determinate', length = 200, max = 255)
+    Throttle = ttk.Progressbar(orient = HORIZONTAL, mode = 'determinate', length = 200, max = 255)
 
-
-
+    
+   
+    
     #Entry
     data_entry = Entry()
     data_entry.place(x = 100, y = 255)
