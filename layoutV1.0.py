@@ -64,7 +64,7 @@ def update_gui():
     global filter_data
     global update_period
 
-    text.place(x = 15, y = 10)
+    t.place(x = 3, y = 425)
     progress_1.place(x = 60, y = 100)
     progress_2.place(x = 60, y = 130)
     progress_3.place(x = 60, y = 160)
@@ -75,8 +75,8 @@ def update_gui():
     while(1):
         if filter_data:
 
-            text.insert(END, filter_data)
-            text.insert(END,"\n")
+            #text.insert(END, filter_data) <-- the text box text
+            #text.insert(END,"\n")
             try:
                 progress_1["value"] = filter_data[0]
                 progress_2["value"] = filter_data[1]
@@ -90,7 +90,7 @@ def update_gui():
 
             
             if time.time() - new >= update_period:
-                text.delete("1.0", END)
+                #text.delete("1.0", END)
                 progress_1["value"] = 0
                 progress_2["value"] = 0
                 progress_3["value"] = 0
@@ -112,13 +112,13 @@ def send():
                                     #Main Loop
 
 if __name__ == "__main__":
-    #frames   415x770
-    #frame_1 = Frame(height = 200, width = 377, bd = 3, relief = 'groove').place(x = 5, y = 5)
-    #frame_2 = Frame(height = 200, width = 377, bd = 3, relief = 'groove').place(x = 205, y = 5)
-    #frame_3 = Frame(height = 200, width = 377, bd = 3, relief = 'groove').place(x = 5, y = 382)
-    #frame_4 = Frame(height = 200, width = 377, bd = 3, relief = 'groove').place(x = 205, y = 382)
-    text = Text(width = 65, height = 5)
-
+    #frames   430x770
+    frame_1 = Frame(height = 200, width = 377, bd = 3, relief = 'groove').place(x = 5, y = 5)
+    frame_2 = Frame(height = 200, width = 377, bd = 3, relief = 'groove').place(x = 382, y = 5)
+    frame_3 = Frame(height = 200, width = 377, bd = 3, relief = 'groove').place(x = 5, y = 205)
+    frame_4 = Frame(height = 200, width = 377, bd = 3, relief = 'groove').place(x = 382, y = 205)
+    t = Text(width = 1, height = 1)
+    #text = None 
     
     #threads
     t2 = threading.Thread(target = update_gui)
@@ -155,6 +155,6 @@ if __name__ == "__main__":
     connect = Button(text = "Connect", command = connect).place(x = 15, y = 360)
    
     #mainloop
-    gui.geometry('1024x600')
+    gui.geometry('770x430+0+0')
     gui.mainloop()
     
