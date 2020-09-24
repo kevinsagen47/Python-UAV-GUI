@@ -33,6 +33,7 @@ gui.title("UAV Command Software")
 def connect():
     global serial_object
     port = 'ACM0'
+   # port = 'AMA0'
     baud = '9600'   
     try:
         try:
@@ -46,14 +47,28 @@ def connect():
     t1.daemon = True
     t1.start()
     
+def disconnect():
+    """ 
+    This function is for disconnecting and quitting the application.
+    Sometimes the application throws a couple of errors while it is being shut down, the fix isn't out yet
+    but will be pushed to the repo once done.
+    simple GUI.quit() calls.
+    """
+    try:
+        serial_object.close() 
+    
+    except AttributeError:
+        print "Closed without Using it -_-"
 
+    gui.quit()
 
 def get_data():
     global serial_object
     global filter_data
     while(1):   
         try:
-            serial_data = serial_object.readline().strip('\n').strip('\r')            
+            serial_data = serial_object.readline().strip('\n').strip('\r')
+            
             filter_data = serial_data.split(',')
             print filter_data        
         except TypeError:
@@ -74,7 +89,14 @@ def update_gui():
 
 
     varBat1=StringVar()
-    #Bat1__.place(x = 160, y= 100)
+    varBat2=StringVar()
+
+    varflightmode=StringVar()
+    varSat=StringVar()
+    varlon=StringVar()
+    varlat=StringVar()
+    varerror=StringVar()
+    
     Bat1__ = Label(textvariable=varBat1).place(x = 160, y= 100)
     while(1):
         if filter_data:
@@ -87,9 +109,19 @@ def update_gui():
                 Pitch["value"] = filter_data[2]
                 Roll["value"] = filter_data[3]
                 Throttle["value"] = filter_data[4]
+                #Alti["value"] = filter_data[5]
 
                 varBat1.set(filter_data[0])
-                #Bat1__.set(Bat_1["value"])
+                varBat2.set(filter_data[1])
+                
+                #varflightmode.set(filter_data[6])
+                #varSat.set(filter_data[7])
+                #varlon.set(filter_data[8])
+                #varlat.set(filter_data[9])
+                #varerror.set(filter_data[10])
+                
+                
+                
             
             except :
                 pass
@@ -102,6 +134,9 @@ def update_gui():
                 Pitch["value"] = 0
                 Roll["value"] = 0
                 Throttle["value"] = 0
+                Alti["value"] = filter_data[5]
+
+                
                 new = time.time()
 
 
@@ -164,7 +199,7 @@ if __name__ == "__main__":
     button_var = IntVar()
     #button
     connect = Button(text = "Connect", command = connect).place(x = 15, y = 360)
-   
+    disconnect = Button(text = "Disconnect", command = disconnect).place(x =300, y = 360)
     #mainloop
     gui.geometry('770x430+0+0')
     gui.mainloop()
