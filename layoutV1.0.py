@@ -27,8 +27,8 @@ serial_object = serial.Serial('/dev/tty' + 'ACM0', 115200)
 gui = Tk()
 gui.title("UAV Command Software")
 
-
-
+varRTH=0
+vStop=0
 
 def connect():
     global serial_object
@@ -78,7 +78,9 @@ def get_data():
 def update_gui():
     global filter_data
     global update_period
-
+    global vStop
+    global varRTH
+    
     t.place(x = 3, y = 425)
     Bat_1.place(x = 45, y = 8)
     Bat_2.place(x = 235, y = 8)
@@ -117,10 +119,22 @@ def update_gui():
     Exec__=Label(textvariable=varExec).place(x = 45, y= 108)
     flightm__ = Label(textvariable=varflightmode).place(x = 235, y= 108)
     Start__= Label(textvariable=varStart).place(x = 322, y= 108)
+    #Start__= Label(textvariable=varRTH).place(x = 322, y= 108)
 
 
     
     while(1):
+        """
+        if(vStop==1):
+            varRTH=69
+            vStop=0
+        else:
+            varRTH=40
+            vStop=1"""
+        send_datas="<0,"+str(varRTH)+','+"2"+","+"3"+","+"4"+ ","+"1"+","+"2"+","+"3"+","+"4"+">"   
+        serial_object.write(send_datas)
+        
+        
         if filter_data:
 
             #text.insert(END, filter_data) <-- the text box text
@@ -143,11 +157,8 @@ def update_gui():
                 varlat.set(filter_data[9])
                 varerror.set(filter_data[10])
                 varStart.set(filter_data[11])
+               # varStart.set(varRTH)
                 varExec.set(filter_data[12])
-                
-                
-                
-                
             
             except :
                 pass
@@ -174,7 +185,10 @@ def send():
     
     serial_object.write(send_data)
 
-
+def RTH():
+    global varRTH
+    varRTH+=1
+    #return varRTH
 
                                     #Main Loop
 
@@ -237,12 +251,10 @@ if __name__ == "__main__":
     connect = Button(text = "Connect", command = connect).place(x = 15, y = 360)
     disconnect = Button(text = "Disconnect", command = disconnect).place(x =300, y = 360)
 
-    button1=Button(text="Send",command=send,width=6).place(x=15,y=315)
-    #send()
-    #serial_object.write("1")
-    #serial_object.close()
-    send_datas="<0,""5"+','+"2"+","+"3"+","+"4"+ ","+"1"+","+"2"+","+"3"+","+"4"+">"   
-    serial_object.write(send_datas)
+    #varRTH=0
+    #RTHb=Button(text="RTH",command=lambda *args:RTH(1),width=6).place(x=15,y=315)
+    RTHb=Button(text="RTH",command=RTH,width=6).place(x=15,y=315)
+    
     #mainloop
     gui.geometry('770x430+0+0')
     gui.mainloop()
