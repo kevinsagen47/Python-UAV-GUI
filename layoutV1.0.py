@@ -187,8 +187,18 @@ def send():
 
 def RTH():
     global varRTH
-    varRTH+=1
+    #varRTH+=1
     #return varRTH
+
+def RTHon(event):
+    global varRTH
+    varRTH=1
+
+
+def RTHoff(event):
+    global varRTH
+    varRTH=0
+
 
                                     #Main Loop
 
@@ -253,8 +263,11 @@ if __name__ == "__main__":
 
     #varRTH=0
     #RTHb=Button(text="RTH",command=lambda *args:RTH(1),width=6).place(x=15,y=315)
-    RTHb=Button(text="RTH",command=RTH,width=6).place(x=15,y=315)
-    
+    #RTHb=Button(text="RTH",command=RTH,width=6).place(x=15,y=315)
+    RTHb=Button(text="RTH",width=6)
+    RTHb.place(x=15,y=315)
+    RTHb.bind('<ButtonPress-1>',RTHon)
+    RTHb.bind('<ButtonRelease-1>',RTHoff)
     #mainloop
     gui.geometry('770x430+0+0')
     gui.mainloop()
