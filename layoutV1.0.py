@@ -23,7 +23,7 @@ import ttk
 serial_data = ''
 filter_data = ''
 update_period = 5
-serial_object = None
+serial_object = serial.Serial('/dev/tty' + 'ACM0', 115200)
 gui = Tk()
 gui.title("UAV Command Software")
 
@@ -34,7 +34,7 @@ def connect():
     global serial_object
     port = 'ACM0'
    # port = 'AMA0'
-    baud = '9600'   
+    baud = '115200'   
     try:
         try:
             serial_object = serial.Serial('/dev/tty' + str(port), baud)                
@@ -46,7 +46,7 @@ def connect():
     t1 = threading.Thread(target = get_data)
     t1.daemon = True
     t1.start()
-    
+
 def disconnect():
     """ 
     This function is for disconnecting and quitting the application.
@@ -236,6 +236,13 @@ if __name__ == "__main__":
     #button
     connect = Button(text = "Connect", command = connect).place(x = 15, y = 360)
     disconnect = Button(text = "Disconnect", command = disconnect).place(x =300, y = 360)
+
+    button1=Button(text="Send",command=send,width=6).place(x=15,y=315)
+    #send()
+    #serial_object.write("1")
+    #serial_object.close()
+    send_datas="<0,""5"+','+"2"+","+"3"+","+"4"+ ","+"1"+","+"2"+","+"3"+","+"4"+">"   
+    serial_object.write(send_datas)
     #mainloop
     gui.geometry('770x430+0+0')
     gui.mainloop()
