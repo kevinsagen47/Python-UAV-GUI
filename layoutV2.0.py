@@ -266,7 +266,7 @@ if __name__ == "__main__":
     
     #Entry
     data_entry = Entry()
-    data_entry.place(x = 1, y = 400)
+    data_entry.place(x = 1, y = 430)
 
 
 
@@ -274,16 +274,46 @@ if __name__ == "__main__":
     #radio button
     button_var = IntVar()
     #button
-    connect = Button(text = "Connect", command = connect).place(x = 15, y = 360)
-    disconnect = Button(text = "Disconnect", command = disconnect).place(x =300, y = 360)
+    connect = Button(text = "Connect", command = connect,bg='green').place(x = 15, y = 385)
+    disconnect = Button(text = "Disconnect", command = disconnect,bg='red').place(x =390, y = 385)
 
     #varRTH=0
     #RTHb=Button(text="RTH",command=lambda *args:RTH(1),width=6).place(x=15,y=315)
     #RTHb=Button(text="RTH",command=RTH,width=6).place(x=15,y=315)
-    RTHb=Button(text="RTH",width=6)
-    RTHb.place(x=15,y=315)
+    RTHb=Button(text="RTH",width=20)
+    RTHb.place(x=395,y=8)
     RTHb.bind('<ButtonPress-1>',RTHon)
     RTHb.bind('<ButtonRelease-1>',RTHoff)
+
+    Stopb=Button(text="STOP",width=20,bg='red')
+    Stopb.place(x=580,y=8)
+
+    takeoffb=Button(text="^ Take Off ^",width=20)
+    takeoffb.place(x=395,y=38)
+
+    landingb=Button(text="v Landing v",width=20)
+    landingb.place(x=580,y=38)
+
+    Loc1_=Label(text = "Set Location 1:").place(x = 395, y= 88)
+    Lon1_=Label(text = "Lon 1:").place(x = 385, y= 108)
+    lon1 = Entry()
+    lon1.place(x = 425, y = 108)
+
+    Lat1_=Label(text = "Lat 1 :").place(x = 385, y= 128)
+    lat1 = Entry()
+    lat1.place(x = 425, y = 128)
+
+    Loc2_=Label(text = "Set Location 2:").place(x = 572, y= 88)
+    Lon2_=Label(text = "Lon 2:").place(x = 572, y= 108)
+    lon2 = Entry()
+    lon2.place(x = 612, y = 108)
+
+    Lat2_=Label(text = "Lat 2 :").place(x = 572, y= 128)
+    lat2 = Entry()
+    lat2.place(x = 612, y = 128)
+
+    Gob=Button(text="GO!!!",width=20,height=2,bg='green')
+    Gob.place(x=508,y=158)
     #mainloop
     gui.geometry('770x430+0+0')
     gui.mainloop()
