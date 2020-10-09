@@ -275,7 +275,7 @@ if __name__ == "__main__":
     button_var = IntVar()
     #button
     connect = Button(text = "Connect", command = connect,bg='green').place(x = 15, y = 385)
-    disconnect = Button(text = "Disconnect", command = disconnect,bg='red').place(x =390, y = 385)
+    disconnect = Button(text = "Disconnect", command = disconnect,bg='coral').place(x =390, y = 385)
 
     #varRTH=0
     #RTHb=Button(text="RTH",command=lambda *args:RTH(1),width=6).place(x=15,y=315)
@@ -312,8 +312,42 @@ if __name__ == "__main__":
     lat2 = Entry()
     lat2.place(x = 612, y = 128)
 
-    Gob=Button(text="GO!!!",width=20,height=2,bg='green')
+    Gob=Button(text="Execute Mission!!!",width=20,height=2,bg='lawngreen')
     Gob.place(x=508,y=158)
+
+
+    altupb=Button(text="^ alt ^",height=4,bg='dodgerblue')
+    altupb.place(x=87,y=220)
+
+    altdownb=Button(text="v alt v",height=4,bg='dodgerblue')
+    altdownb.place(x=87,y=300)
+
+    yawleftb=Button(text="< Yaw",width=5,height=2,bg='dodgerblue')
+    yawleftb.place(x=20,y=275)
+
+    yawrightb=Button(text="Yaw >",width=5,height=2,bg='dodgerblue')
+    yawrightb.place(x=150,y=275)
+
+    
+
+    pitchupb=Button(text="^Pitch^",height=4,bg='dodgerblue')
+    pitchupb.place(x=607,y=220)
+
+    pitchdownb=Button(text="vPitchv",height=4,bg='dodgerblue')
+    pitchdownb.place(x=607,y=300)
+
+    rollleftb=Button(text="< Roll",width=5,height=2,bg='dodgerblue')
+    rollleftb.place(x=535,y=275)
+
+    rollrightb=Button(text="Roll >",width=5,height=2,bg='dodgerblue')
+    rollrightb.place(x=680,y=275)
+    
+    #landingb=Button(text="v Landing v",width=20)
+    #landingb.place(x=580,y=38)
+    
+
+
+
     #mainloop
     gui.geometry('770x430+0+0')
     gui.mainloop()
