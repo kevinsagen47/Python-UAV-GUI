@@ -82,14 +82,14 @@ def update_gui():
     global varRTH
     
     t.place(x = 3, y = 425)
-    Bat_1.place(x = 45, y = 8)
-    Bat_2.place(x = 235, y = 8)
+    Bat_1.place(x = 45, y = 28)
+    Bat_2.place(x = 235, y = 28)
 
-    Pitch.place(x = 45, y = 28)
-    Roll.place(x = 235, y = 28)
+    Pitch.place(x = 45, y = 48)
+    Roll.place(x = 235, y = 48)
 
-    Alti.place(x = 45, y = 48)
-    Throttle.place(x = 235, y = 48)
+    Alti.place(x = 45, y = 88)
+    Throttle.place(x = 235, y = 88)
     new = time.time()
 
 
@@ -104,24 +104,27 @@ def update_gui():
     varerror=StringVar()
     varStart=StringVar()
     varExec=StringVar()
+    varYaw=StringVar()
+    varThrot=StringVar()
     
     Bat1__ = Label(textvariable=varBat1).place(x = 50, y= 8)
     Bat2__ = Label(textvariable=varBat2).place(x = 250, y= 8)
 
-    alti__ = Label(textvariable=varAlti).place(x = 170, y= 48)
+    alti__ = Label(textvariable=varAlti).place(x = 50, y= 68)
+    Throt__=Label(textvariable=varThrot).place(x = 250, y= 68)
+    
+    error__ = Label(textvariable=varerror).place(x = 45, y= 108)
+    Sat__=Label(textvariable=varSat).place(x = 235, y= 108)
 
-    error__ = Label(textvariable=varerror).place(x = 45, y= 68)
-    Sat__=Label(textvariable=varSat).place(x = 235, y= 68)
+    lon__=Label(textvariable=varlon).place(x = 45, y= 128)
+    lat__=Label(textvariable=varlat).place(x = 235, y= 128)
 
-    lon__=Label(textvariable=varlon).place(x = 45, y= 88)
-    lat__=Label(textvariable=varlat).place(x = 235, y= 88)
-
-    Exec__=Label(textvariable=varExec).place(x = 45, y= 108)
-    flightm__ = Label(textvariable=varflightmode).place(x = 235, y= 108)
-    Start__= Label(textvariable=varStart).place(x = 322, y= 108)
+    Exec__=Label(textvariable=varExec).place(x = 45, y= 148)
+    flightm__ = Label(textvariable=varflightmode).place(x = 235, y= 148)
+    Start__= Label(textvariable=varStart).place(x = 235, y= 168)
     #Start__= Label(textvariable=varRTH).place(x = 322, y= 108)
-
-
+    Yaw__= Label(textvariable=varYaw).place(x = 45, y= 168)
+    
     
     while(1):
         """
@@ -131,8 +134,8 @@ def update_gui():
         else:
             varRTH=40
             vStop=1"""
-        send_datas="<0,"+str(varRTH)+','+"2"+","+"3"+","+"4"+ ","+"1"+","+"2"+","+"3"+","+"4"+">"   
-        serial_object.write(send_datas)
+        #send_datas="<0,"+str(varRTH)+','+"2"+","+"3"+","+"4"+ ","+"1"+","+"2"+","+"3"+","+"4"+">"   
+        #serial_object.write(send_datas)
         
         
         if filter_data:
@@ -150,6 +153,7 @@ def update_gui():
                 varBat1.set(filter_data[0])
                 varBat2.set(filter_data[1])
                 varAlti.set(filter_data[5])
+                varThrot.set(filter_data[4])
                 
                 varflightmode.set(filter_data[6])
                 varSat.set(filter_data[7])
@@ -159,6 +163,7 @@ def update_gui():
                 varStart.set(filter_data[11])
                # varStart.set(varRTH)
                 varExec.set(filter_data[12])
+                varYaw.set(filter_data[13])
             
             except :
                 pass
@@ -220,24 +225,35 @@ if __name__ == "__main__":
 
     
     #Labels
-    Bat1_ = Label(text = "Bat 1:").place(x = 8, y= 8)
-    Bat2_ = Label(text = "Bat 2:").place(x = 190, y= 8)
+    Bat1_ = Label(text = "Bat 1:").place(x = 8, y= 18)
+    Volt1_=Label(text = "x0.01 Volts").place(x=80,y=8)
+
+    Bat2_ = Label(text = "Bat 2:").place(x = 190, y= 18)
+    Volt2_=Label(text = "x0.01 Volts").place(x=280,y=8)
     
-    Pitch_ = Label(text = "Pitch:").place(x = 8, y= 28)
-    Roll_ = Label(text = "Roll:").place(x = 190, y= 28)
+    Pitch_ = Label(text = "Pitch:").place(x = 8, y= 48)
+    Roll_ = Label(text = "Roll:").place(x = 190, y= 48)
 
-    Alti_ = Label(text = "Alti:").place(x = 8, y= 48)
-    Throttle_ = Label(text = "Throt:").place(x = 190, y= 48)
+    Alti_ = Label(text = "Alti:").place(x = 8, y= 78)
+    DM_=Label(text = "x0.1 Meters").place(x=100,y=68)
+    
+    Throttle_ = Label(text = "Throt:").place(x = 190, y= 78)
 
-    error_=Label(text = "Error:").place(x = 8, y= 68)
-    Sat_=Label(text = "Sat :").place(x = 190, y= 68)
+    error_=Label(text = "Error:").place(x = 8, y= 108)
+    Sat_=Label(text = "Sat :").place(x = 190, y= 108)
 
-    lon_=Label(text = "lon :").place(x = 8, y= 88)
-    lat_=Label(text = "lat :").place(x = 190, y= 88)
+    lon_=Label(text = "lon :").place(x = 8, y= 128)
+    lat_=Label(text = "lat :").place(x = 190, y= 128)
         
-    exec_=Label(text = "Exec:").place(x = 8, y= 108)
-    mode_=Label(text = "Mode:").place(x = 190, y= 108)
-    start_=Label(text = "Start:").place(x =285, y= 108)
+    exec_=Label(text = "Exec:").place(x = 8, y= 148)
+    mode_=Label(text = "Mode:").place(x = 190, y= 148)
+    #start_=Label(text = "Start:").place(x =285, y= 168)
+    Yaw_=Label(text = "Yaw:").place(x = 8, y= 168)
+
+    degree_sign=u"\N{DEGREE SIGN}"
+    degree_=Label(text=degree_sign).place(x = 70, y= 168)
+
+    start_=Label(text = "Start:").place(x =190, y= 168)
     #progress_bars
     Bat_1 = ttk.Progressbar(orient = HORIZONTAL, mode = 'determinate', length = 145, max = 1680)
     Bat_2 = ttk.Progressbar(orient = HORIZONTAL, mode = 'determinate', length = 145, max = 840)
@@ -250,7 +266,7 @@ if __name__ == "__main__":
     
     #Entry
     data_entry = Entry()
-    data_entry.place(x = 100, y = 255)
+    data_entry.place(x = 1, y = 400)
 
 
 
